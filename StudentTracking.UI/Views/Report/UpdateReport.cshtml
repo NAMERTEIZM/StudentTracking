@@ -1,0 +1,46 @@
+﻿@model ReportUpdateVM
+@{
+    ViewData["Title"] = "UpdateReport";
+}
+
+<h1>Rapor Güncelle</h1>
+
+<form asp-controller="Report" asp-action="UpdateReport" method="post">
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Öğrenci Ad Soyad:</label>
+        <div class="col-sm-10">
+            <select asp-for="StudentID" class="form-control">
+                <option value="">Seç</option>
+                @foreach (var student in ViewBag.StudentList as SelectList)
+                {
+                    <option value="@student.Value">@student.Text</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <label class="col-sm-2 col-form-label">Açıklama</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="Description" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-2">
+        <label class="col-sm-2 col-form-label">Not</label>
+        <div class="col-sm-10">
+            <input asp-for="Score" class="form-control" type="text" />
+        </div>
+    </div>
+    <div class="row mb-2">
+        <label class="col-sm-2 col-form-label">Tarih</label>
+        <div class="col-sm-10">
+            <input asp-for="Date" class="form-control" type="date" />
+        </div>
+    </div>
+    <div class="row mb-2">
+        <label class="col-sm-2 col-form-label">Hafta</label>
+        <div class="col-sm-10">
+            <input asp-for="WeekOfYear" class="form-control" type="text" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Rapor Güncelle</button>
+</form>

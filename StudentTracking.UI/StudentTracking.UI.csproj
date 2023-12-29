@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	  <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings> 
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.21" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StudentTracking.BLL\StudentTracking.BLL.csproj" />
+    <ProjectReference Include="..\StudentTracking.DAL\StudentTracking.DAL.csproj" />
+    <ProjectReference Include="..\StudentTracking.VM\StudentTracking.VM.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Middlewares\" />
+  </ItemGroup>
+	
+</Project>

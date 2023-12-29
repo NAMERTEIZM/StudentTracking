@@ -1,0 +1,46 @@
+﻿@model ExamUpdateVM 
+@{
+    ViewData["Title"] = "UpdateExam";
+}
+
+<h1>Sınav Güncelle</h1>
+
+<form asp-controller="Exam" asp-action="UpdateExam" method="post">
+    <div class="row mb-3">
+        <div class="col-sm-10">
+            <input hidden="hidden" type="text" asp-for="ID" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Sınav Türü:</label>
+        <div class="col-sm-10">
+            <select asp-for="StatusID" class="form-control">
+                <option value="">Seçiniz</option>
+                @foreach (var classItem in (IEnumerable<SelectListItem>)ViewBag.StatusList)
+                {
+                    <option value="@classItem.Value" selected="@classItem.Selected">@classItem.Text</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Sınav Adı:</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="Name" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Açıklama:</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="Body" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Sınav Tarihi:</label>
+        <div class="col-sm-10">
+            <input asp-for="Date" class="form-control" type="date" />
+        </div>
+    </div>
+   
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+</form>

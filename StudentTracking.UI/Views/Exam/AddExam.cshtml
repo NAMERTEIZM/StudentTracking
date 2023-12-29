@@ -1,0 +1,45 @@
+﻿@model ExamInsertVM
+@{
+    ViewData["Title"] = "AddExam";
+}
+
+<h1>Sınav Ekle</h1>
+
+<form asp-controller="Exam" asp-action="AddExam" method="post">
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Sınav Türü</label>
+        <div class="col-sm-10">
+            <div class="custom-select" style="width:200px;">
+                <select asp-for="StatusID" class="form-control">
+                    <option value="">Sınav Türü Seçiniz</option>
+                    @foreach (var item in ViewBag.StatusList as SelectList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+
+                    }
+                    
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Sınav Adı</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="Name" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Açıklama</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="Body" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Sınav Tarihi</label>
+        <div class="col-sm-10">
+            <input asp-for="Date" class="form-control" type="date" />
+        </div>
+    </div>
+   
+    <button type="submit" class="btn btn-primary">Sınav Ekle</button>
+</form>

@@ -1,0 +1,49 @@
+﻿@model List<StudentSelectVM>
+@{
+    ViewData["Title"] = "SelectStudent";
+}
+
+<h1>SelectStudent</h1>
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body table-border-style">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-1">Sıra</th>
+                            <th class="col-2">Öğrenci Adı</th>
+                            <th class="col-2">Öğrenci Soyadı</th>
+                            <th class="col-2">Email</th>
+                            <th class="col-1">Öğrenci Durumu</th>
+                            <th class="col-1">Sınıfı</th>
+                            <th class="col-1">Aktif mi?</th>
+                            <th class="col-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@Model[i].FirstName</td>
+                                <td>@Model[i].LastName</td>
+                                <td>@Model[i].Email</td>
+                                <td>@Model[i].StatusName</td>
+                                <td>@Model[i].ClassName</td>
+                                <td>@Model[i].isActive.ToString()</td>
+                                <td>
+                                    <a asp-controller="Student" asp-action="UpdateStudent" asp-route-id="@Model[i].ID"><i style="font-size:large;" class="bi bi-pencil-square text-info"></i></a>
+                                    <span style="margin: 0 8px;"></span>
+                                    <a href="@Url.Action("DeleteStudent", new { id = Model[i].ID })"
+                                       onclick="return confirm('Bu öğeyi silmek istediğinizden emin misiniz?');"><i style="font-size:large;" class="bi bi-trash text-danger"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

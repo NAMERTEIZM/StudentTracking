@@ -1,0 +1,16 @@
+﻿@model List<ClassSelectVM>
+
+@{
+    ViewData["Title"] = "FastSelectClass";
+}
+
+<<form method="post" asp-action="FastSelectClass">
+    <select name="SelectedClassId">
+        <option value="">-- Sınıf Seç --</option>
+        @foreach (var item in Model)
+        {
+            <option value="@item.ID">@item.Name</option>
+        }
+    </select>
+    <button type="submit">Seç</button>
+</form>

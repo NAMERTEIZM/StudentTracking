@@ -1,0 +1,60 @@
+﻿@model StudentUpdateVM
+@{
+    ViewData["Title"] = "UpdateStudent";
+}
+
+<h1>UpdateStudent</h1>
+<form asp-controller="Student" asp-action="UpdateStudent" method="post">
+    <div class="row mb-3">
+        <div class="col-sm-10">
+            <input hidden="hidden" type="text" asp-for="ID" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Ad</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="FirstName" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Soyad</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="LastName" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control" type="email" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Öğrenci Durumu:</label>
+        <div class="col-sm-10">
+            <select asp-for="StatusID" class="form-control">
+                <option value="">Select</option>
+                @foreach (var status in (IEnumerable<SelectListItem>)ViewBag.StatusList)
+                {
+                    <option value="@status.Value" selected="@status.Selected">@status.Text</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Sınıf:</label>
+        <div class="col-sm-10">
+            <select asp-for="ClassID" class="form-control">
+                <option value="">Select</option>
+                @foreach (var classItem in (IEnumerable<SelectListItem>)ViewBag.ClassList)
+                {
+                    <option value="@classItem.Value" selected="@classItem.Selected">@classItem.Text</option>
+                }
+            </select>
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+</form>

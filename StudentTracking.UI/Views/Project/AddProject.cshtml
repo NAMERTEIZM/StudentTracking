@@ -1,0 +1,166 @@
+﻿@model ProjectInsertVM
+@{ 
+    ViewData["Title"] = "AddProject"; 
+}
+
+<h1>AddProject</h1>
+
+<style>
+    .scrollable-list {
+        height: 300px;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+</style>
+
+<form asp-controller="Project" asp-action="AddProject" method="post">
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Proje Adı:</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="Name" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Başlama Tarihi</label>
+        <div class="col-sm-10">
+            <input asp-for="StartedDate" class="form-control" type="date" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Bitiş Tarihi</label>
+        <div class="col-sm-10">
+            <input asp-for="EndDate" class="form-control" type="date" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Final Projesi</label>
+        <div class="col-sm-10">
+            <input class="form-check-input" type="checkbox" asp-for="isFinal">
+            <label class="form-check-label" for="exampleCheckbox">
+                Final Projesi mi?
+            </label>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Sınıf Adı</label>
+        <div class="col-sm-10">
+            <select asp-for="SelectedClassID" class="form-select" id="classSelect">
+                <option value="">-- Sınıf Seç --</option>
+                @foreach (var classItem in Model.Classes)
+                {
+    <option value="@classItem.ID">@classItem.Name</option>}
+            </select>
+        </div>
+    </div>
+
+    <input type="hidden" asp-for="SelectedStudentIDs" id="SelectedStudentIDs"  />
+
+
+
+    <div class="container mt-5 mb-3">
+        <div class="row">
+            <div class="col-md-5">
+                <h4>Öğrenci Listesi</h4>
+                <select id="allStudents" class="form-select scrollable-list" multiple></select>
+            </div>
+
+            <div class="col-md-2 text-center">
+                <button id="transferButton" class="btn btn-primary mt-2">Seçiliyi Aktar</button>
+                <button id="transferBackButton" class="btn btn-primary mt-2">Seçileni Geri Aktar</button>
+            </div>
+
+            <div class="col-md-5">
+                <h4>Seçilen Öğrenciler</h4>
+
+                <select id="selectedStudents" class="form-select scrollable-list" multiple></select>
+
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Proje Başlat</button>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var classSelect = document.getElementById('classSelect');
+
+        classSelect.addEventListener('change', function () {
+            var classId = this.value;
+
+            // Sınıf seçildiğinde öğrenci listesini yükle
+            if (classId) {
+                fetch('/Student/GetStudentsByClass?classId=' + classId)
+                    .then(response => response.json())
+                    .then(data => {
+                        var allStudentsSelect = document.getElementById('allStudents');
+                        console.log(data);
+
+                        // Kontrol et: allStudentsSelect null değilse devam et
+                        if (allStudentsSelect) {
+                            allStudentsSelect.options.length = 0; // Mevcut öğrenci listesini temizle
+
+                            data.forEach(student => {
+                                var option = document.createElement('option');
+                                option.value = student.id;
+                                option.text = student.firstName + ' ' + student.lastName;
+                                allStudentsSelect.add(option);
+                            });
+                        } else {
+                            console.error('allStudentsSelect is null');
+                        }
+                    })
+                    .catch(error => console.error('Sınıfa ait öğrencileri getirirken bir hata oluştu:', error));
+            }
+        });
+
+        // Diğer event listener'lar...
+    });
+
+    document.getElementById('transferButton').addEventListener('click', function () {
+        var allStudentsSelect = document.getElementById('allStudents');
+        var selectedStudentsSelect = document.getElementById('selectedStudents');
+
+        for (var i = 0; i < allStudentsSelect.options.length; i++) {
+            var option = allStudentsSelect.options[i];
+            if (option.selected) {
+                selectedStudentsSelect.add(new Option(option.text, option.value));
+                option.remove();
+                i--;
+            }
+        }
+
+        // Eklenen öğrencilerin kimliklerini SelectedStudentIDs listesine ekle
+        updateSelectedStudentIDs();
+
+        event.preventDefault();
+    });
+
+    document.getElementById('transferBackButton').addEventListener('click', function (event) {
+        var allStudentsSelect = document.getElementById('allStudents');
+        var selectedStudentsSelect = document.getElementById('selectedStudents');
+
+        var selectedOption = selectedStudentsSelect.options[selectedStudentsSelect.selectedIndex];
+
+        if (selectedOption) {
+            allStudentsSelect.add(new Option(selectedOption.text, selectedOption.value));
+            selectedOption.remove();
+        }
+
+        // Silinen öğrencilerin kimliklerini SelectedStudentIDs listesinden çıkar
+        updateSelectedStudentIDs();
+
+        event.preventDefault();
+    });
+
+    function updateSelectedStudentIDs() {
+        var selectedStudentsSelect = document.getElementById('selectedStudents');
+        var selectedStudentIDs = Array.from(selectedStudentsSelect.options).map(option => parseInt(option.value));
+
+        // SelectedStudentIDs gizli alanını güncelle
+        var hiddenInput = document.getElementById('SelectedStudentIDs');
+        hiddenInput.value = selectedStudentIDs.join(',');
+    }
+
+</script>

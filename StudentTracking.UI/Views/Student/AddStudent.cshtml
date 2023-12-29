@@ -1,0 +1,55 @@
+﻿@model StudentInsertVM
+@{
+    ViewData["Title"] = "AddStudent";
+}
+
+<h1>AddClass</h1>
+
+<form asp-controller="Student" asp-action="AddStudent" method="post">
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Ad:</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="FirstName" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Soyad:</label>
+        <div class="col-sm-10">
+            <input type="text" asp-for="LastName" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Email:</label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control" type="email" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Öğrenci Durumu:</label>
+        <div class="col-sm-10">
+            <select asp-for="StatusID" class="form-control">
+                <option value="">Select</option>
+                @foreach (var status in ViewBag.StatusList as SelectList)
+                {
+                    <option value="@status.Value">@status.Text</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Sınıf:</label>
+        <div class="col-sm-10">
+            <select asp-for="ClassID" class="form-control">
+                <option value="">Select</option>
+                @foreach (var classItem in ViewBag.ClassList as SelectList)
+                {
+                    <option value="@classItem.Value">@classItem.Text</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sınıf Ekle</button>
+</form>

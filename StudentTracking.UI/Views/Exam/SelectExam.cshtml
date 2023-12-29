@@ -1,0 +1,49 @@
+﻿@model List<ExamSelectVM>
+
+@{
+    ViewData["Title"] = "SelectExam";
+}
+
+<h1>Select Exam</h1>
+
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body table-border-style">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-1">Sıra</th>
+                            <th class="col-2">Sınav Adı</th>
+                            <th class="col-2">Açıklama</th>
+                            <th class="col-2">Sınav Tarihi</th>
+                            <th class="col-2">Durum</th>
+                            <th class="col-1">Aktif Mi</th>
+                            <th class="col-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@Model[i].Name</td>
+                                <td>@Model[i].Body</td>
+                                <td>@Model[i].Date</td>
+                                <td>@Model[i].StatusID</td>
+                                <td>@Model[i].isActive</td>
+                                <td>
+                                    <a asp-controller="Exam" asp-action="UpdateExam" asp-route-id="@Model[i].ID"><i style="font-size:large;" class="bi bi-pencil-square text-info"></i></a>
+                                    <span style="margin: 0 8px;"></span>
+                                    <a href="@Url.Action("DeleteExam", new { id = Model[i].ID })"
+                                       onclick="return confirm('Bu öğeyi silmek istediğinizden emin misiniz?');"><i style="font-size:large;" class="bi bi-trash text-danger"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

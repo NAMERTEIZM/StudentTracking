@@ -1,0 +1,259 @@
+﻿@model StudentSelectVM
+
+
+
+<div class="flip-card m-2" id="card@(Model.ID)">
+    <div class="flip-card-inner" style=" border-radius: 15px;">
+        <div class="flip-card-front" style=" border-radius: 15px;">
+
+            <div id="flipbutton" class="row">
+                <div id="id3" class="col">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title=" Haftalık Soru Sayısı">
+                        @Model.Question.Count()
+
+                    </button>
+                </div>
+                <div class="col" id="studentName">
+                    <p>@Model.FirstName @Model.LastName</p>
+
+                </div>
+                <div id="id4" class="col">
+
+                    <button type="button" class="btn btn-danger" onclick="flipCard(@(Model.ID))">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                    <button id="expandAllBtn" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordionExample" aria-expanded="false" aria-controls="accordionExample">
+                        <i class="bi bi-caret-down"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <ul class="list-group accordion-list col-md-12" style=" max-height:200px;">
+
+                <li class="list-group-item" style="min-height: 200px;">
+               
+             
+                          
+                                <div class="panel-body">
+                                    <table class="table table-condensed table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Fist Name</th>
+                                                <th>Last Name</th>
+                                                <th>City</th>
+                                                <th>State</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+                                                <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                <td>Carlos</td>
+                                                <td>Mathias</td>
+                                                <td>Leme</td>
+                                                <td>SP</td>
+                                                <td>new</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="12" class="hiddenRow">
+                                                    <div class="accordian-body collapse" id="demo1">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr class="info">
+                                                                    <th>Job</th>
+                                                                    <th>Company</th>
+                                                                    <th>Salary</th>
+                                                                    <th>Date On</th>
+                                                                    <th>Date off</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody>
+
+                                                                <tr data-toggle="collapse" class="accordion-toggle" data-target="#demo10">
+                                                                    <td> <a href="#">Enginner Software</a></td>
+                                                                    <td>Google</td>
+                                                                    <td>U$8.00000 </td>
+                                                                    <td> 2016/09/27</td>
+                                                                    <td> 2017/09/27</td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td colspan="12" class="hiddenRow">
+                                                                        <div class="accordian-body collapse" id="demo10">
+                                                                            <table class="table table-striped">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td><a href="#"> XPTO 1</a></td>
+                                                                                        <td>XPTO 2</td>
+                                                                                        <td>Obs</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>item 1</th>
+                                                                                        <th>item 2</th>
+                                                                                        <th>item 3 </th>
+                                                                                        <th>item 4</th>
+                                                                                        <th>item 5</th>
+                                                                                        <th>Actions</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td>item 1</td>
+                                                                                        <td>item 2</td>
+                                                                                        <td>item 3</td>
+                                                                                        <td>item 4</td>
+                                                                                        <td>item 5</td>
+                                                                                        <td>
+                                                                                            <a href="#" class="btn btn-default btn-sm">
+                                                                                                <i class="glyphicon glyphicon-cog"></i>
+                                                                                            </a>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Scrum Master</td>
+                                                                    <td>Google</td>
+                                                                    <td>U$8.00000 </td>
+                                                                    <td> 2016/09/27</td>
+                                                                    <td> 2017/09/27</td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td>Back-end</td>
+                                                                    <td>Google</td>
+                                                                    <td>U$8.00000 </td>
+                                                                    <td> 2016/09/27</td>
+                                                                    <td> 2017/09/27</td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td>Front-end</td>
+                                                                    <td>Google</td>
+                                                                    <td>U$8.00000 </td>
+                                                                    <td> 2016/09/27</td>
+                                                                    <td> 2017/09/27</td>
+                                                                    <td>
+                                                                        <a href="#" class="btn btn-default btn-sm">
+                                                                            <i class="glyphicon glyphicon-cog"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+
+
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+
+                                            <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
+                                                <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                <td>Silvio</td>
+                                                <td>Santos</td>
+                                                <td>São Paulo</td>
+                                                <td>SP</td>
+                                                <td> new</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" class="hiddenRow"><div id="demo2" class="accordian-body collapse">Demo2</div></td>
+                                            </tr>
+                                            <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
+                                                <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                <td>John</td>
+                                                <td>Doe</td>
+                                                <td>Dracena</td>
+                                                <td>SP</td>
+                                                <td> New</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6" class="hiddenRow"><div id="demo3" class="accordian-body collapse">Demo3 sadasdasdasdasdas</div></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            
+
+                   
+
+
+                </li>
+
+            </ul>
+
+
+            <div class="change-content mt-2">
+                @for (int j = 1; j <= 5; j++)
+                {
+                    <button class="change-button" onclick="changeContent(@Model.ID, @j)"></button>
+                }
+            </div>
+        </div>
+        <div class="flip-card-back">
+
+            <div id="flipbutton" class="row">
+                <div id="id1" class="col"><p style="color: black">Öğrenci Adı</p></div>
+                <div id="id2" class="col">
+                    <button type="button" class="btn btn-danger" onclick="flipCard(@(Model.ID))">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+                <label style="color:black" for="exampleInputEmail1" class="form-label">Soru</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3">
+                <label style="color: black" for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Ekle</button>
+
+
+
+        </div>
+
+
+    </div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
